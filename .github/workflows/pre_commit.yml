@@ -1,17 +1,17 @@
 name: pre-commit
 on:
-pull_request:
-push:
-branches: ['*', '**']
+  pull_request:
+  push:
+    branches: ['*', '**']
 jobs:
-pre-commit:
-runs-on: ubuntu-latest
-timeout-minutes: 10
+  pre-commit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
 
-steps:
-- uses: actions/checkout@v3
-- uses: actions/setup-python@v3
-- uses: pre-commit/action@v3.0.0
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-python@v3
+    - uses: pre-commit/action@v3.0.0
 #- name: Install Flake8 and Black
 #  run: |
 #    pip install flake8 black
