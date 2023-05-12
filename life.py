@@ -50,16 +50,16 @@ class Board(AbstractLifeGameBoard):
             row_str = []
             for item in row:
                 if not item:
-                    row_str.append(". ")
+                    row_str.append(".")
                 else:
-                    row_str.append("o ")
+                    row_str.append("o")
             board_str.append("".join(row_str))
         return "\n".join(board_str)
 
     def next(self) -> None:
         new_board = [[False for _ in range(self.width)] for _ in range(self.height)]
-        for i in range(self.width):
-            for j in range(self.height):
+        for i in range(self.height):
+            for j in range(self.width):
                 neighbors = self.count_neighbors(i, j)
                 if self.board[i][j]:
                     if neighbors < 2 or neighbors > 3:
@@ -73,12 +73,21 @@ class Board(AbstractLifeGameBoard):
         return self.board
 
     def count_neighbors(self, row: int, col: int) -> int:
-        count = 0
-        for i in range(max(0, row - 1), min(self.width, row + 2)):
-            for j in range(max(0, col - 1), min(self.height, col + 2)):
-                count += self.board[i][j]
-        count -= self.board[row][col]
-        return count
+        neighbours = 0
+        for i in range(-1, 2):
+            for j in range(-1, 2):
+                if i == 0 and j == 0:
+                    continue
+                neighbours += self.is_alive(row + i, col + j)
+        return neighbours
+
+    # def count_neighbors(self, row: int, col: int) -> int:
+    #     count = 0
+    #     for i in range(max(0, row - 1), min(self.width, row + 2)):
+    #         for j in range(max(0, col - 1), min(self.height, col + 2)):
+    #             count += self.board[i][j]
+    #     count -= self.board[row][col]
+    #     return count
 
     def place_cell(self, row: int, col: int):
         self.board[row][col] = True
@@ -90,6 +99,10 @@ class Board(AbstractLifeGameBoard):
             self.board[row][col] = False
 
     def is_alive(self, row: int, col: int) -> bool:
+        if row >= self.height or row < 0:
+            return False
+        if col >= self.width or col < 0:
+            return False
         if not self.board[row][col]:
             return False
         else:
