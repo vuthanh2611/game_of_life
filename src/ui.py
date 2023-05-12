@@ -150,4 +150,5 @@ class InterfaceController:
             self.screen.print_at(line, x_pos, y_pos + line_no)
 
 
-Screen.wrapper(InterfaceController)
+def main():
+    Screen.wrapper(InterfaceController)

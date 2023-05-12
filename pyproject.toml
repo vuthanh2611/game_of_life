@@ -1,0 +1,11 @@
+[project]
+name="game_of_life"
+version="0.1.0"
+authors=[{name="Antonio Topchii", email="antonio.topchii@harbour.space"}]
+dependencies=["asciimatics"]
+
+[project.scripts]
+game_of_life="ui:main"
+
+[project.gui-scripts]
+qute_game_of_life="ui_qt:main"
