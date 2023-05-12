@@ -39,6 +39,8 @@ class AbstractLifeGameBoard(ABC):
 class Board(AbstractLifeGameBoard):
     """Put your solution here"""
 
+    counter = 0
+
     def __init__(self, width: int = 3, height: int = 3):
         self.width = width
         self.height = height
@@ -70,6 +72,7 @@ class Board(AbstractLifeGameBoard):
                     if neighbors == 3:
                         new_board[i][j] = True
         self.board = new_board
+        self.counter += 1
         return self.board
 
     def count_neighbors(self, row: int, col: int) -> int:
@@ -119,4 +122,5 @@ if __name__ == "__main__":
     for i in range(100):
         print(board)
         board.next()
+        print(board.next().calls)
         sleep(0.5)
